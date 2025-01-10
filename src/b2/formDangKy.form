@@ -51,11 +51,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="chk1" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="rb1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdo1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="rb2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdo2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="cmb" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbo" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="chk2" min="-2" max="-2" attributes="0"/>
                                   <Component id="chk3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -90,8 +90,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rb1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rb2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rdo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rdo2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -106,7 +106,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -178,18 +178,19 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDateActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="rb1">
+    <Component class="javax.swing.JRadioButton" name="rdo1">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="bgGender"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Nam"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rb1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdo1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="rb2">
+    <Component class="javax.swing.JRadioButton" name="rdo2">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="bgGender"/>
@@ -197,7 +198,7 @@
         <Property name="text" type="java.lang.String" value="N&#x1eef;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rb2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdo2ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNumber">
@@ -220,7 +221,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="cmb">
+    <Component class="javax.swing.JComboBox" name="cbo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -236,11 +237,13 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chk1">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="To&#xe1;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chk2">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="V&#x103;n"/>
       </Properties>
       <Events>

@@ -39,12 +39,12 @@ public class formDangKy extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
-        rb1 = new javax.swing.JRadioButton();
-        rb2 = new javax.swing.JRadioButton();
+        rdo1 = new javax.swing.JRadioButton();
+        rdo2 = new javax.swing.JRadioButton();
         txtNumber = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAddress = new javax.swing.JTextArea();
-        cmb = new javax.swing.JComboBox<>();
+        cbo = new javax.swing.JComboBox<>();
         chk1 = new javax.swing.JCheckBox();
         chk2 = new javax.swing.JCheckBox();
         chk3 = new javax.swing.JCheckBox();
@@ -77,19 +77,20 @@ public class formDangKy extends javax.swing.JFrame {
             }
         });
 
-        bgGender.add(rb1);
-        rb1.setText("Nam");
-        rb1.addActionListener(new java.awt.event.ActionListener() {
+        bgGender.add(rdo1);
+        rdo1.setSelected(true);
+        rdo1.setText("Nam");
+        rdo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb1ActionPerformed(evt);
+                rdo1ActionPerformed(evt);
             }
         });
 
-        bgGender.add(rb2);
-        rb2.setText("Nữ");
-        rb2.addActionListener(new java.awt.event.ActionListener() {
+        bgGender.add(rdo2);
+        rdo2.setText("Nữ");
+        rdo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb2ActionPerformed(evt);
+                rdo2ActionPerformed(evt);
             }
         });
 
@@ -103,10 +104,12 @@ public class formDangKy extends javax.swing.JFrame {
         txtAddress.setRows(5);
         jScrollPane1.setViewportView(txtAddress);
 
-        cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngành UDPM", "Ngành PTPM", "Ngành XLDL" }));
+        cbo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngành UDPM", "Ngành PTPM", "Ngành XLDL" }));
 
+        chk1.setSelected(true);
         chk1.setText("Toán");
 
+        chk2.setSelected(true);
         chk2.setText("Văn");
         chk2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,10 +153,10 @@ public class formDangKy extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(chk1)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rb1)
+                                        .addComponent(rdo1)
                                         .addGap(18, 18, 18)
-                                        .addComponent(rb2))
-                                    .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rdo2))
+                                    .addComponent(cbo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(chk2)
                                     .addComponent(chk3))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -178,8 +181,8 @@ public class formDangKy extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rb1)
-                    .addComponent(rb2)
+                    .addComponent(rdo1)
+                    .addComponent(rdo2)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,7 +194,7 @@ public class formDangKy extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -213,13 +216,13 @@ public class formDangKy extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
 
-    private void rb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb1ActionPerformed
+    private void rdo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rb1ActionPerformed
+    }//GEN-LAST:event_rdo1ActionPerformed
 
-    private void rb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb2ActionPerformed
+    private void rdo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rb2ActionPerformed
+    }//GEN-LAST:event_rdo2ActionPerformed
 
     private void txtNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumberActionPerformed
         // TODO add your handling code here:
@@ -234,12 +237,12 @@ public class formDangKy extends javax.swing.JFrame {
         int a = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn đăng ký không?", "Xác nhận", JOptionPane.YES_NO_CANCEL_OPTION);
         if (a == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đăng ký thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Ho va ten: " + txtName.getText() + "\n"
-                    + "Ngay sinh: " + txtDate.getText() + "\n"
-                    + "Gioi tinh: " + (rb1.isSelected() ? "Nam" : "Nu") + "\n"
-                    + "Dia chi: " + txtAddress.getText() + "\n"
-                    + "Nganh hoc: " + cmb.getItemAt(cmb.getSelectedIndex()) + "\n"
-                    + "Mon ua thich: " + (chk1.isSelected() ? (chk1.getText() + (chk2.isSelected() || chk3.isSelected() ? ", " : "")) : "")
+            System.out.println("Họ và tên: " + txtName.getText() + "\n"
+                    + "Ngày sinh: " + txtDate.getText() + "\n"
+                    + "Giới tính: " + (rdo1.isSelected() ? "Nam" : "Nữ") + "\n"
+                    + "Địa chỉ: " + txtAddress.getText() + "\n"
+                    + "Ngành học: " + cbo.getItemAt(cbo.getSelectedIndex()) + "\n"
+                    + "Món ưa thích: " + (chk1.isSelected() ? (chk1.getText() + (chk2.isSelected() || chk3.isSelected() ? ", " : "")) : "")
                     + (chk2.isSelected() ? (chk2.getText() + (chk3.isSelected() ? ", " + chk3.getText() : "")) : (chk3.isSelected() ? chk3.getText() : "")) + "\n");
         }
         if (a == JOptionPane.NO_OPTION) {
@@ -287,10 +290,10 @@ public class formDangKy extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgGender;
+    private javax.swing.JComboBox<String> cbo;
     private javax.swing.JCheckBox chk1;
     private javax.swing.JCheckBox chk2;
     private javax.swing.JCheckBox chk3;
-    private javax.swing.JComboBox<String> cmb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -301,8 +304,8 @@ public class formDangKy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JRadioButton rb1;
-    private javax.swing.JRadioButton rb2;
+    private javax.swing.JRadioButton rdo1;
+    private javax.swing.JRadioButton rdo2;
     private javax.swing.JTextArea txtAddress;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtName;
