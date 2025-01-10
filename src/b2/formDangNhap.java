@@ -47,24 +47,8 @@ public class formDangNhap extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         txtUN.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtUN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUNActionPerformed(evt);
-            }
-        });
-
-        txtPW.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPWActionPerformed(evt);
-            }
-        });
 
         chkRE.setText("Remember me?");
-        chkRE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkREActionPerformed(evt);
-            }
-        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -122,14 +106,6 @@ public class formDangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUNActionPerformed
-
-    private void chkREActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkREActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkREActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String un = txtUN.getText();
@@ -144,10 +120,6 @@ public class formDangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Đăng nhập thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void txtPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPWActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPWActionPerformed
 
     /**
      * @param args the command line arguments

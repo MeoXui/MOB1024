@@ -103,22 +103,13 @@
           <Color id="Text Cursor"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUNActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtPW">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPWActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkRE">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remember me?"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkREActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLogin">
       <Properties>

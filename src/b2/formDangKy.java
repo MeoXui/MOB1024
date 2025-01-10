@@ -71,34 +71,12 @@ public class formDangKy extends javax.swing.JFrame {
 
         jLabel1.setText("Môn học ưa thích");
 
-        txtDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDateActionPerformed(evt);
-            }
-        });
-
         bgGender.add(rdo1);
         rdo1.setSelected(true);
         rdo1.setText("Nam");
-        rdo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdo1ActionPerformed(evt);
-            }
-        });
 
         bgGender.add(rdo2);
         rdo2.setText("Nữ");
-        rdo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdo2ActionPerformed(evt);
-            }
-        });
-
-        txtNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumberActionPerformed(evt);
-            }
-        });
 
         txtAddress.setColumns(20);
         txtAddress.setRows(5);
@@ -111,11 +89,6 @@ public class formDangKy extends javax.swing.JFrame {
 
         chk2.setSelected(true);
         chk2.setText("Văn");
-        chk2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chk2ActionPerformed(evt);
-            }
-        });
 
         chk3.setText("Anh");
 
@@ -211,26 +184,6 @@ public class formDangKy extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDateActionPerformed
-
-    private void rdo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdo1ActionPerformed
-
-    private void rdo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdo2ActionPerformed
-
-    private void txtNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumberActionPerformed
-
-    private void chk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chk2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
