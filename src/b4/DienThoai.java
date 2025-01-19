@@ -9,6 +9,7 @@ package b4;
  * @author jinca
  */
 public class DienThoai {
+
     private String imei;
     private String hang;
     private int gia;

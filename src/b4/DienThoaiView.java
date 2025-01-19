@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author jinca
  */
 public class DienThoaiView extends javax.swing.JFrame {
-
+    
     List<DienThoai> list = new ArrayList<>();
     DefaultTableModel dtm = new DefaultTableModel();
 
@@ -27,7 +27,7 @@ public class DienThoaiView extends javax.swing.JFrame {
         setCboDungLuong();
         loadData();
     }
-
+    
     void fakeData() {
         list.add(new DienThoai("A01", "SamSung", 1000000, "Đỏ", 1024));
         list.add(new DienThoai("I01", "Iphone", 2000000, "Xanh", 2048));
@@ -35,7 +35,7 @@ public class DienThoaiView extends javax.swing.JFrame {
         list.add(new DienThoai("I02", "Iphone", 20000000, "Tím", 128));
         list.add(new DienThoai("I03", "Iphone", 5000000, "Hồng", 32));
     }
-
+    
     private void loadData() {
         if (list.isEmpty()) {
             fakeData();
@@ -47,16 +47,16 @@ public class DienThoaiView extends javax.swing.JFrame {
         }
         tbl.setModel(dtm);
     }
-
+    
     DefaultComboBoxModel<String> dcbm;
-
+    
     private void setCboHang() {
         dcbm = new DefaultComboBoxModel<>();
         dcbm.addElement("Iphone");
         dcbm.addElement("SamSung");
         cboHang.setModel(dcbm);
     }
-
+    
     private void setCboDungLuong() {
         dcbm = new DefaultComboBoxModel<>();
         for (int i = 2; i < 14; i++) {
@@ -248,7 +248,7 @@ public class DienThoaiView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DienThoaiView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
