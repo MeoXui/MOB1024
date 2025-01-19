@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author jinca
  */
 public class DienThoaiView extends javax.swing.JFrame {
-    
+
     List<DienThoai> list = new ArrayList<>();
     DefaultTableModel dtm = new DefaultTableModel();
 
@@ -25,20 +25,20 @@ public class DienThoaiView extends javax.swing.JFrame {
         initComponents();
         setCboHang();
         setCboDungLuong();
-        loadData();
+        load();
     }
-    
-    void fakeData() {
+
+    void fake() {
         list.add(new DienThoai("A01", "SamSung", 1000000, "Đỏ", 1024));
         list.add(new DienThoai("I01", "Iphone", 2000000, "Xanh", 2048));
         list.add(new DienThoai("A02", "SamSung", 15000000, "Đen", 64));
         list.add(new DienThoai("I02", "Iphone", 20000000, "Tím", 128));
         list.add(new DienThoai("I03", "Iphone", 5000000, "Hồng", 32));
     }
-    
-    private void loadData() {
+
+    private void load() {
         if (list.isEmpty()) {
-            fakeData();
+            fake();
         }
         dtm = (DefaultTableModel) tbl.getModel();
         dtm.setRowCount(0);
@@ -47,16 +47,16 @@ public class DienThoaiView extends javax.swing.JFrame {
         }
         tbl.setModel(dtm);
     }
-    
+
     DefaultComboBoxModel<String> dcbm;
-    
+
     private void setCboHang() {
         dcbm = new DefaultComboBoxModel<>();
         dcbm.addElement("Iphone");
         dcbm.addElement("SamSung");
         cboHang.setModel(dcbm);
     }
-    
+
     private void setCboDungLuong() {
         dcbm = new DefaultComboBoxModel<>();
         for (int i = 2; i < 14; i++) {
@@ -65,9 +65,59 @@ public class DienThoaiView extends javax.swing.JFrame {
         cboDungLuong.setModel(dcbm);
         cboDungLuong.setSelectedIndex(2);
     }
-    
+
+    int selectedIndexData = -1;
+
+    void get() {
+        selectedIndexData = tbl.getSelectedRow();
+        DienThoai dt = list.get(selectedIndexData);
+        txtImei.setText(dt.getImei());
+        cboHang.setSelectedItem(dt.getHang());
+        txtGia.setText(String.valueOf(dt.getGia()));
+        txtMau.setText(dt.getMauSac());
+        cboDungLuong.setSelectedItem(DL2Str(dt.getDungLuong()));
+    }
+
+    void add() {
+//        System.out.println(Integer.parseInt(txtGia.getText()));
+        list.add(new DienThoai(txtImei.getText(),
+                cboHang.getSelectedItem().toString(),
+                Integer.parseInt(txtGia.getText()),
+                txtMau.getText(),
+                (int) Math.pow(2, cboDungLuong.getSelectedIndex() + 2)
+        ));
+        load();
+    }
+
+    void edit() {
+        list.set(selectedIndexData, new DienThoai(txtImei.getText(),
+                cboHang.getSelectedItem().toString(),
+                Integer.parseInt(txtGia.getText()),
+                txtMau.getText(),
+                (int) Math.pow(2, cboDungLuong.getSelectedIndex() + 2)
+        ));
+        load();
+    }
+
+    void delete() {
+        list.remove(selectedIndexData);
+        load();
+    }
+
     String DL2Str(int dl) {
         return dl < 1024 ? dl + "GB" : (dl / 1024) + "TB";
+    }
+
+    int DL2Int(String s) {
+        System.out.println(s);
+        int i = Integer.parseInt(s.substring(0, s.length() - 2));
+        if (s.contains("GB")) {
+            return i;
+        }
+        if (s.contains("TB")) {
+            return i * 1024;
+        }
+        return 1 / 0;
     }
 
     /**
@@ -114,10 +164,25 @@ public class DienThoaiView extends javax.swing.JFrame {
         jLabel6.setText("Dung lượng");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,14 +284,34 @@ public class DienThoaiView extends javax.swing.JFrame {
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
         // TODO add your handling code here:
-        int i = tbl.getSelectedRow();
-        DienThoai dt = list.get(i);
-        txtImei.setText(dt.getImei());
-        cboHang.setSelectedItem(dt.getHang());
-        txtGia.setText(String.valueOf(dt.getGia()));
-        txtMau.setText(dt.getMauSac());
-        cboDungLuong.setSelectedItem(DL2Str(dt.getDungLuong()));
+        get();
     }//GEN-LAST:event_tblMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        add();
+        selectedIndexData = -1;
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        if (selectedIndexData >= 0 && selectedIndexData < list.size()) {
+            edit();
+        } else {
+            System.out.println("Selected Index: -1");
+        }
+        selectedIndexData = -1;
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        if (selectedIndexData >= 0 && selectedIndexData < list.size()) {
+            delete();
+        } else {
+            System.out.println("Selected Index: -1");
+        }
+        selectedIndexData = -1;
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments
