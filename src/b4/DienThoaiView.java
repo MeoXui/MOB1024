@@ -68,7 +68,7 @@ public class DienThoaiView extends javax.swing.JFrame {
 
     int selectedIndexData = -1;
 
-    void get() {
+    private void get() {
         selectedIndexData = tbl.getSelectedRow();
         DienThoai dt = list.get(selectedIndexData);
         txtImei.setText(dt.getImei());
@@ -78,8 +78,7 @@ public class DienThoaiView extends javax.swing.JFrame {
         cboDungLuong.setSelectedItem(DL2Str(dt.getDungLuong()));
     }
 
-    void add() {
-//        System.out.println(Integer.parseInt(txtGia.getText()));
+    private void add() {
         list.add(new DienThoai(txtImei.getText(),
                 cboHang.getSelectedItem().toString(),
                 Integer.parseInt(txtGia.getText()),
@@ -89,7 +88,7 @@ public class DienThoaiView extends javax.swing.JFrame {
         load();
     }
 
-    void edit() {
+    private void edit() {
         list.set(selectedIndexData, new DienThoai(txtImei.getText(),
                 cboHang.getSelectedItem().toString(),
                 Integer.parseInt(txtGia.getText()),
