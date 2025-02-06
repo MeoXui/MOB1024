@@ -32,7 +32,6 @@ public class view extends javax.swing.JFrame {
 
     private void fake() {
         list.add(new Pickleball("VNB023302", "Vợt Pickleball Joola Perseus 14mm Mod TA-15 Pro Player Edition", "Joola", 6990000, 5, 1));
-        list.add(new Pickleball("VNB023302", "Vợt Pickleball Joola Perseus 14mm Mod TA-15 Pro Player Edition", "Joola", 6990000, 5, 1));
         list.add(new Pickleball("VNB023793", "Vợt Pickleball Wilson Cadence Pro 16mm", "Wilson", 5090000, 10, 1));
         list.add(new Pickleball("VNB023792", "Vợt Pickleball Wilson Fierce Pro 13mm", "Wilson", 3180000, 8, 0));
         list.add(new Pickleball("VNB022333", "Vợt Pickleball Joola Ben Johns Hyperion 3S 14mm", "Joola", 6990000, 5, 0));
@@ -287,10 +286,8 @@ public class view extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new view().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new view().setVisible(true);
         });
     }
 
