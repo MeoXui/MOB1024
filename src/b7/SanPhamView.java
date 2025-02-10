@@ -4,6 +4,7 @@
  */
 package b7;
 
+import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,19 +24,37 @@ public class SanPhamView extends javax.swing.JFrame {
         service = new SanPhamService();
         service.sampleData();
         selectedIndex = 0;
-        load();
-        fill();
+        reload();
+        fillup();
     }
-    
-    private void fill() {
-        txtMa.setText(service.get(selectedIndex).maSP);
-        txtTen.setText(service.get(selectedIndex).ten);
-        txtKL.setText(String.valueOf(service.get(selectedIndex).khoiLuong));
-        cboLoai.setSelectedItem(service.get(selectedIndex).loaiSP);
+
+    private void fillup() {
+        if (selectedIndex < 0 || selectedIndex >= service.list.size()) {
+            clear();
+            return;
+        }
+        txtMa.setText(service.list.get(selectedIndex).maSP);
+        txtTen.setText(service.list.get(selectedIndex).ten);
+        txtKL.setText(String.valueOf(service.list.get(selectedIndex).khoiLuong));
+        cboLoai.setSelectedItem(service.list.get(selectedIndex).loaiSP);
     }
-    
-    private void load() {
-        tbl.setModel(service.getModel((DefaultTableModel) tbl.getModel()));
+
+    private void reload() {
+        tbl.setModel(service.getModel((DefaultTableModel) tbl.getModel(), ""));
+    }
+
+    private SanPham formdown() {
+        if (txtMa.getText().isEmpty() || txtTen.getText().isEmpty() || txtKL.getText().isEmpty()) {
+            return null;
+        }
+        return new SanPham(txtMa.getText(), txtTen.getText(), Integer.parseInt(txtKL.getText()), cboLoai.getSelectedItem().toString());
+    }
+
+    private void clear() {
+        txtMa.setText("");
+        txtTen.setText("");
+        txtKL.setText("");
+        cboLoai.setSelectedIndex(0);
     }
 
     /**
@@ -75,6 +94,11 @@ public class SanPhamView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnClear.setText("Clear form");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -83,6 +107,11 @@ public class SanPhamView extends javax.swing.JFrame {
         jLabel2.setText("Tên sản phẩm");
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,14 +201,39 @@ public class SanPhamView extends javax.swing.JFrame {
         );
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnSapXep.setText("Sắp xếp");
+        btnSapXep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSapXepActionPerformed(evt);
+            }
+        });
 
         btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "List Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 10))); // NOI18N
 
@@ -245,9 +299,9 @@ public class SanPhamView extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThem)
                             .addComponent(btnSua)
@@ -256,9 +310,7 @@ public class SanPhamView extends javax.swing.JFrame {
                             .addComponent(btnThoat))
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -270,8 +322,59 @@ public class SanPhamView extends javax.swing.JFrame {
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
         // TODO add your handling code here:
         selectedIndex = tbl.getSelectedRow();
-        fill();
+        fillup();
     }//GEN-LAST:event_tblMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        if (formdown() != null) {
+            service.list.add(formdown());
+        }
+        reload();
+        selectedIndex = service.list.size() - 1;
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        service.list.remove(selectedIndex);
+        if (formdown() != null) {
+            service.list.add(selectedIndex, formdown());
+        }
+        reload();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        tbl.setModel(service.getModel((DefaultTableModel) tbl.getModel(), txtSearch.getText()));
+        reload();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSapXepActionPerformed
+        // TODO add your handling code here:
+        Collections.sort(service.list, (o1, o2) -> o2.khoiLuong - o1.khoiLuong);
+        reload();
+        selectedIndex = -1;
+    }//GEN-LAST:event_btnSapXepActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        if (selectedIndex < 0 || selectedIndex >= service.list.size()) {
+            return;
+        }
+        service.list.remove(selectedIndex);
+        reload();
+        selectedIndex = -1;
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -20,12 +20,14 @@ public class SanPhamService {
         list = new ArrayList<>();
     }
 
-    public DefaultTableModel getModel(DefaultTableModel model) {
+    public DefaultTableModel getModel(DefaultTableModel model, String s) {
         model.setRowCount(0);
         for (SanPham sp : list) {
-            model.addRow(new Object[]{
-                sp.maSP, sp.ten, sp.khoiLuong, sp.loaiSP
-            });
+            if (sp.ten.toLowerCase().contains(s.toLowerCase())) {
+                model.addRow(new Object[]{
+                    sp.maSP, sp.ten, sp.khoiLuong, sp.loaiSP
+                });
+            }
         }
         return model;
     }
@@ -36,9 +38,5 @@ public class SanPhamService {
         list.add(new SanPham("sp03", "Dao trái cây", 1234, SanPham.l1));
         list.add(new SanPham("sp04", "Gà nướng", 89, SanPham.l1));
         list.add(new SanPham("sp05", "Dừa loại 3", 999999999, SanPham.l1));
-    }
-
-    public SanPham get(int index) {
-        return list.get(index);
     }
 }
