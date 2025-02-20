@@ -2,37 +2,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package b10;
+package b12;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-//mnopqrs
 
 /**
  *
  * @author jinca
  */
-public class DBC {
+public class connect {
 
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "QLGV";
-    public static final String TABLENAME = "giang_vien";
+    public static final String DBNAME = "QLKH";
+    public static final String TABLENAME = "khach_hang";
     public static final String USERNAME = "sa";
     public static final String PASSWORD = "as";
 
     Connection con;
 
-    List<GiangVien> list;
+    List<KhachHang> list;
 
-    public DBC() {
+    public connect() {
         list = new ArrayList<>();
         reload();
     }
@@ -46,37 +44,35 @@ public class DBC {
             con = DriverManager.getConnection(url, USERNAME, PASSWORD);
             ResultSet rs = con.createStatement().executeQuery("SELECT * FROM " + TABLENAME);
             while (rs.next()) {
-                list.add(new GiangVien(rs.getString("ma"), rs.getString("ten"),
-                        rs.getString("loai"), rs.getInt("tuoi"), rs.getInt("bac"),
-                        rs.getBoolean("gioi_tinh")));
+                list.add(new KhachHang(rs.getString("ma"), rs.getString("ten"),
+                        rs.getInt("tuoi"), rs.getBoolean("gioi_tinh"), rs.getString("loai")));
             }
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException e) {
         }
     }
 
     public DefaultTableModel getModel() {
-        String[] cols = {"Mã", "Tên", "Tuổi", "Bậc", "Giới tính"};
+        String[] cols = {"Mã KH", "Tên", "Tuổi", "Giới tính", "Loại Khánh Hàng"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
-        for (GiangVien gv : list) {
-            model.addRow(new Object[]{gv.ma, gv.ten, gv.tuoi, gv.bac, gv.gioitinh ? "Nam" : "Nữ"});
+        for (KhachHang kh : list) {
+            model.addRow(new Object[]{kh.ma, kh.ten, kh.tuoi, kh.gioitinh ? "Nam" : "Nữ", kh.loai});
         }
         return model;
     }
 
-    public GiangVien get(int index) {
+    public KhachHang get(int index) {
         return list.get(index);
     }
 
-    public boolean add(GiangVien gv) {
-        String s = "INSERT INTO " + TABLENAME + " VALUES (?,?,?,?,?,?)";
+    public boolean add(KhachHang kh) {
+        String s = "INSERT INTO " + TABLENAME + " VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(s);
-            ps.setString(1, gv.ma);
-            ps.setString(2, gv.ten);
-            ps.setString(3, gv.loai);
-            ps.setInt(4, gv.tuoi);
-            ps.setInt(5, gv.bac);
-            ps.setBoolean(6, gv.gioitinh);
+            ps.setString(1, kh.ma);
+            ps.setString(2, kh.ten);
+            ps.setInt(3, kh.tuoi);
+            ps.setBoolean(4, kh.gioitinh);
+            ps.setString(5, kh.loai);
             ps.executeUpdate();
             reload();
             return true;
@@ -85,31 +81,32 @@ public class DBC {
         }
     }
 
-    public boolean update(GiangVien gv) {
+    public boolean update(KhachHang kh) {
         String s = "UPDATE " + TABLENAME + ""
-                + " SET ten = ?, loai = ?, tuoi = ?, bac = ?, gioi_tinh = ?"
+                + " SET ten = ?, tuoi = ?, gioi_tinh = ?, loai = ? "
                 + " WHERE ma = ?";
         try {
             PreparedStatement ps = con.prepareStatement(s);
-            ps.setString(1, gv.ten);
-            ps.setString(2, gv.loai);
-            ps.setInt(3, gv.tuoi);
-            ps.setInt(4, gv.bac);
-            ps.setBoolean(5, gv.gioitinh);
-            ps.setString(6, gv.ma);
+            ps.setString(1, kh.ten);
+            ps.setInt(2, kh.tuoi);
+            ps.setBoolean(3, kh.gioitinh);
+            ps.setString(4, kh.loai);
+            ps.setString(5, kh.ma);
             ps.executeUpdate();
             reload();
+            System.out.println("làm tốt lắm");
             return true;
         } catch (SQLException e) {
+            System.out.println("lỗi mất rồi");
             return false;
         }
     }
 
-    public boolean delete(String maGV) {
+    public boolean delete(String maKH) {
         String s = "DELETE " + TABLENAME + " WHERE ma = ?";
         try {
             PreparedStatement ps = con.prepareStatement(s);
-            ps.setString(1, maGV);
+            ps.setString(1, maKH);
             ps.executeUpdate();
             reload();
             return true;
@@ -118,21 +115,17 @@ public class DBC {
         }
     }
 
-    public List<GiangVien> searchFulltime() {
-        List<GiangVien> search = new ArrayList<>();
-        for (GiangVien gv : list) {
-            if (gv.loai.equalsIgnoreCase("loai 1")) {
-                search.add(gv);
+    public DefaultTableModel search(int min, int max) {
+        List<KhachHang> search = new ArrayList<>();
+        for (KhachHang kh : list) {
+            if (kh.tuoi > min && kh.tuoi < max) {
+                search.add(kh);
             }
         }
-        return search;
-    }
-
-    public DefaultTableModel getFulltime() {
-        String[] cols = {"Mã", "Tên", "Tuổi", "Bậc", "Giới tính"};
+        String[] cols = {"Mã KH", "Tên", "Tuổi", "Giới tính", "Loại Khánh Hàng"};
         DefaultTableModel model = new DefaultTableModel(cols, 0);
-        for (GiangVien gv : searchFulltime()) {
-            model.addRow(new Object[]{gv.ma, gv.ten, gv.tuoi, gv.bac, gv.gioitinh ? "Nam" : "Nữ"});
+        for (KhachHang kh : search) {
+            model.addRow(new Object[]{kh.ma, kh.ten, kh.tuoi, kh.gioitinh ? "Nam" : "Nữ", kh.loai});
         }
         return model;
     }

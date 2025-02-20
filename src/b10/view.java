@@ -21,9 +21,15 @@ public class view extends javax.swing.JFrame {
     public view() {
         initComponents();
         db = new DBC();
-        selectedIndex = 0;
         load();
+        selectedIndex = 0;
         fill();
+    }
+    
+    private void reload() {
+        db.reload();
+        load();
+        selectedIndex = -1;
     }
 
     private void load() {
@@ -40,17 +46,18 @@ public class view extends javax.swing.JFrame {
         txtTen.setText(gv.ten);
         txtTuoi.setText(gv.tuoi + "");
         sp.setValue(gv.bac);
-        cbo.setSelectedIndex(gv.loai.equalsIgnoreCase("loai 1") ? 0 : 1);
+        cboLoai.setSelectedIndex(gv.loai.equalsIgnoreCase("loai 1") ? 0 : 1);
         rdo1.setSelected(gv.gioitinh);
         rdo2.setSelected(!gv.gioitinh);
     }
 
     private void clear() {
+        reload();
         txtMa.setText("");
         txtTen.setText("");
         txtTuoi.setText("");
         sp.setValue(1);
-        cbo.setSelectedIndex(0);
+        cboLoai.setSelectedIndex(0);
         rdo1.setSelected(true);
     }
 
@@ -76,7 +83,7 @@ public class view extends javax.swing.JFrame {
         txtTen = new javax.swing.JTextField();
         txtTuoi = new javax.swing.JTextField();
         sp = new javax.swing.JSpinner();
-        cbo = new javax.swing.JComboBox<>();
+        cboLoai = new javax.swing.JComboBox<>();
         rdo1 = new javax.swing.JRadioButton();
         rdo2 = new javax.swing.JRadioButton();
         btnThem = new javax.swing.JButton();
@@ -115,7 +122,7 @@ public class view extends javax.swing.JFrame {
 
         sp.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        cbo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fulltime", "Parttime" }));
+        cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fulltime", "Parttime" }));
 
         btg.add(rdo1);
         rdo1.setSelected(true);
@@ -210,7 +217,7 @@ public class view extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtMa)
                                         .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -265,7 +272,7 @@ public class view extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(cbo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdo1)
                     .addComponent(rdo2))
                 .addGap(18, 18, 18)
@@ -287,9 +294,6 @@ public class view extends javax.swing.JFrame {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         clear();
-        db.reload();
-        load();
-        selectedIndex = -1;
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMouseClicked
@@ -301,12 +305,11 @@ public class view extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         GiangVien gv = new GiangVien(txtMa.getText(), txtTen.getText(),
-                "Loai " + (cbo.getSelectedIndex() == 0 ? "1" : "2"),
+                "Loai " + (cboLoai.getSelectedIndex() == 0 ? "1" : "2"),
                 Integer.parseInt(txtTuoi.getText()), (int) sp.getValue(),
                 rdo1.isSelected());
         db.add(gv);
-        load();
-        selectedIndex = -1;
+        reload();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -316,13 +319,12 @@ public class view extends javax.swing.JFrame {
         }
         GiangVien gv = db.get(selectedIndex);
         gv.ten = txtTen.getText();
-        gv.loai = "Loai " + (cbo.getSelectedIndex() == 0 ? "1" : "2");
+        gv.loai = "Loai " + (cboLoai.getSelectedIndex() == 0 ? "1" : "2");
         gv.tuoi = Integer.parseInt(txtTuoi.getText());
         gv.bac = (int) sp.getValue();
         gv.gioitinh = rdo1.isSelected();
         db.update(gv);
-        load();
-        selectedIndex = -1;
+        reload();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -331,8 +333,7 @@ public class view extends javax.swing.JFrame {
             return;
         }
         db.delete(txtMa.getText());
-        load();
-        selectedIndex = -1;
+        reload();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnGVFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGVFActionPerformed
@@ -390,7 +391,7 @@ public class view extends javax.swing.JFrame {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> cbo;
+    private javax.swing.JComboBox<String> cboLoai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
