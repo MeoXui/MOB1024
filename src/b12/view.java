@@ -21,8 +21,8 @@ public class view extends javax.swing.JFrame {
     public view() {
         initComponents();
         db = new connect();
-        selectedIndex = 0;
         load();
+        selectedIndex = 0;
         fill();
     }
     
