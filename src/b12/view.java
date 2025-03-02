@@ -283,7 +283,7 @@ public class view extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "Title 1"
             }
         ));
         tbl.addMouseListener(new java.awt.event.MouseAdapter() {

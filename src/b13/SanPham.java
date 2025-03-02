@@ -2,28 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Huynk_PH38086;
+package b13;
+
+import java.sql.Date;
 
 /**
  *
  * @author jinca
  */
-public class NhanVien {
+public class SanPham {
 
-    public int ID;
     public String ma;
     public String ten;
-    public String sdt;
+    public Date ngaySX;
+    public String web;
+    public int sl;
     public int trangThai;
 
-    public NhanVien() {
+    public SanPham() {
     }
 
-    public NhanVien(int ID, String ma, String ten, String sdt, int trangThai) {
-        this.ID = ID;
+    public SanPham(String ma, String ten, Date ngaySX, String web, int sl, int trangThai) {
         this.ma = ma;
         this.ten = ten;
-        this.sdt = sdt;
+        this.ngaySX = ngaySX;
+        this.web = web;
+        this.sl = sl;
         this.trangThai = trangThai;
     }
 }
